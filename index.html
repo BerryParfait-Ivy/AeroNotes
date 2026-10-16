@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroNotes</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="stage">
+
+  <section class="screen" id="screen-welcome" data-bg="assets/screens/welcome.jpg">
+    <button class="hot hot-btn" id="btn-start" aria-label="Let's Start"></button>
+  </section>
+
+  <section class="screen" id="screen-login" data-bg="assets/screens/login.jpg">
+    <input class="hot hot-input" id="input-login-email" type="email" placeholder="" autocomplete="username">
+    <input class="hot hot-input" id="input-login-password" type="password" placeholder="" autocomplete="current-password">
+    <button class="hot hot-btn" id="btn-login-submit" aria-label="Log in"></button>
+    <button class="hot hot-btn" id="btn-login-back" aria-label="Back"></button>
+    <div class="hint" id="login-hint"></div>
+  </section>
+
+  <section class="screen" id="screen-main" data-bg="assets/screens/main.jpg">
+    <button class="hot hot-btn hot-round" id="btn-main-user" aria-label="User"></button>
+    <button class="hot hot-btn" id="btn-main-settings" aria-label="Settings"></button>
+    <button class="hot hot-btn hot-round" id="btn-main-notes" aria-label="Notes"></button>
+    <button class="hot hot-btn hot-round" id="btn-main-folders" aria-label="Folders"></button>
+  </section>
+
+  <section class="screen" id="screen-notes" data-bg="assets/screens/notes.jpg">
+    <button class="hot hot-btn hot-round" id="btn-notes-add" aria-label="Add note"></button>
+    <div class="thumb-strip" id="notes-thumb-strip"></div>
+    <button class="hot hot-btn" id="btn-notes-back" aria-label="Back"></button>
+    <div class="folder-context" id="notes-folder-context" hidden></div>
+
+    <button class="aero-pill" id="btn-notes-import" hidden>&#128194; Add old notes</button>
+  </section>
+
+  <section class="screen" id="screen-folder" data-bg="assets/screens/folder.jpg">
+    <div class="folder-preview" id="folder-preview">
+      <div class="folder-preview-empty">Select a folder below, or create a new one.</div>
+    </div>
+    <button class="hot hot-btn hot-round hot-small" id="btn-folder-add" aria-label="Add folder"></button>
+    <div class="thumb-strip thumb-strip--folders" id="folders-thumb-strip"></div>
+    <button class="hot hot-btn" id="btn-folder-back" aria-label="Back"></button>
+  </section>
+
+  <section class="screen" id="screen-settings" data-bg="assets/screens/settings.jpg">
+    <button class="hot hot-tab" id="tab-general" aria-label="General"></button>
+    <button class="hot hot-tab" id="tab-saving" aria-label="Saving"></button>
+
+    <div class="settings-pane" id="pane-general">
+      <select class="hot hot-select" id="select-language">
+        <option value="English">English</option>
+        <option value="Spanish">Espa&ntilde;ol</option>
+        <option value="French">Fran&ccedil;ais</option>
+        <option value="German">Deutsch</option>
+      </select>
+      <select class="hot hot-select" id="select-startup">
+        <option value="Home">Home</option>
+        <option value="Notes">Notes</option>
+        <option value="Folders">Folders</option>
+      </select>
+      <button class="hot hot-toggle" id="toggle-autosave" aria-label="Auto Save"></button>
+      <button class="hot hot-btn" id="btn-edit-path" aria-label="Edit path"></button>
+      <div class="path-display" id="path-display"></div>
+    </div>
+
+    <div class="settings-pane" id="pane-saving" hidden>
+      <div class="saving-info">
+        <p><strong>Saving preferences</strong></p>
+        <p>All notes, folders and your profile are saved automatically to this browser's local storage.</p>
+        <label class="saving-row">Autosave interval
+          <select class="hot-inline-select" id="select-autosave-interval">
+            <option value="instant">Instant</option>
+            <option value="30">Every 30s</option>
+            <option value="60">Every 60s</option>
+          </select>
+        </label>
+        <button class="text-btn" id="btn-clear-data">Clear all local data</button>
+      </div>
+    </div>
+
+    <button class="hot hot-btn" id="btn-settings-back" aria-label="Back"></button>
+  </section>
+
+  <section class="screen" id="screen-user" data-bg="assets/screens/user.jpg">
+    <input class="hot hot-input" id="input-firstname" type="text" placeholder="">
+    <input class="hot hot-input" id="input-lastname" type="text" placeholder="">
+    <input class="hot hot-input" id="input-age" type="number" min="0" max="130" placeholder="">
+    <input class="hot hot-input" id="input-gender" type="text" placeholder="">
+    <input class="hot hot-input" id="input-gmail" type="email" placeholder="">
+    <button class="hot hot-btn" id="btn-logout" aria-label="Log out"></button>
+    <button class="hot hot-btn" id="btn-user-back" aria-label="Back"></button>
+    <div class="hint" id="user-hint"></div>
+  </section>
+
+  <section class="screen" id="screen-editor" data-bg="assets/screens/editor.jpg">
+    <button class="hot hot-btn" id="btn-editor-back" aria-label="Back"></button>
+
+    <button class="hot tool-btn" id="tool-pencil"   data-tool="pencil"></button>
+    <button class="hot tool-btn" id="tool-eraser"   data-tool="eraser"></button>
+    <button class="hot tool-btn" id="tool-highlighter" data-tool="highlighter"></button>
+    <button class="hot tool-btn" id="tool-marker"   data-tool="marker"></button>
+    <button class="hot tool-btn" id="tool-pen"      data-tool="pen"></button>
+    <button class="hot tool-btn" id="tool-folder"   aria-label="Assign folder"></button>
+    <button class="hot tool-btn" id="tool-image"    aria-label="Insert image"></button>
+    <button class="hot tool-btn" id="tool-insert"   aria-label="Insert text"></button>
+    <button class="hot tool-btn" id="tool-undo"     aria-label="Undo"></button>
+    <button class="hot tool-btn" id="tool-redo"     aria-label="Redo"></button>
+    <button class="hot tool-btn" id="tool-save"     aria-label="Save"></button>
+    <button class="hot tool-btn" id="tool-print"    aria-label="Print"></button>
+
+    <button class="hot hot-btn hot-round hot-small" id="btn-editor-newnote" aria-label="New note"></button>
+
+    <div class="canvas-wrap" id="canvas-wrap">
+      <canvas id="note-canvas"></canvas>
+    </div>
+    <input type="file" id="image-file-input" accept="image/*" hidden>
+    <input type="text" id="title-input" class="title-input" placeholder="Untitled note" hidden>
+  </section>
+
+  <div id="tool-popover" class="tool-popover" hidden>
+    <div class="tp-row" id="tp-colors"></div>
+    <div class="tp-row">
+      <input type="range" id="tp-size" min="1" max="60" value="6">
+      <span id="tp-size-label">6px</span>
+    </div>
+  </div>
+
+  <div class="picker-overlay" id="picker" hidden>
+    <div class="picker-box">
+      <div class="picker-title" id="picker-title"></div>
+      <div class="picker-list" id="picker-list"></div>
+      <div class="picker-actions">
+        <button class="aero-pill aero-pill--ghost" id="picker-cancel">Cancel</button>
+        <button class="aero-pill" id="picker-ok">Add</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast" class="toast" hidden></div>
+<div class="rotate-hint">Rotate your device for the full AeroNotes experience &#128241;&#8635;</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
